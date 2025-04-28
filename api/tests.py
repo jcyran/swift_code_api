@@ -1,3 +1,6 @@
 from django.test import TestCase
+from .models import Country, BankBranch
 
-# Create your tests here.
+class BankBranchModuleTest(TestCase):
+    
+
