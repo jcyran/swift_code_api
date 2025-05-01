@@ -2,17 +2,31 @@ version: '3.9'
 
 services:
   db:
-    image: postgres:15
-    container_name: postgres_db
-    restart: always
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
     environment:
       POSTGRES_DB: mydb
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
     ports:
       - "5432:5432"
+
+  web:
+    build: .
+    command: sh -c "python manage.py check_db_connection --retry 30 && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - .:/app:z
+    ports:
+      - "8080:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_NAME=mydb
+      - DB_USER=user
+      - DB_PASSWORD=pass
+      - DB_HOST=db
+      - DB_PORT=5432
 
 volumes:
-  pgdata:
+  postgres_data:

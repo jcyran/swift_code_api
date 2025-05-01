@@ -8,24 +8,34 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Country',
+            name="Country",
             fields=[
-                ('ISO2', models.CharField(max_length=2, primary_key=True, serialize=False)),
-                ('country_name', models.CharField(max_length=255)),
+                (
+                    "ISO2",
+                    models.CharField(max_length=2, primary_key=True, serialize=False),
+                ),
+                ("country_name", models.CharField(max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='BankBranch',
+            name="BankBranch",
             fields=[
-                ('swift_code', models.CharField(max_length=11, primary_key=True, serialize=False)),
-                ('bank_name', models.CharField(max_length=255)),
-                ('bank_address', models.CharField(max_length=255)),
-                ('country', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.country')),
+                (
+                    "swift_code",
+                    models.CharField(max_length=11, primary_key=True, serialize=False),
+                ),
+                ("bank_name", models.CharField(max_length=255)),
+                ("bank_address", models.CharField(max_length=255)),
+                (
+                    "country",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="api.country"
+                    ),
+                ),
             ],
         ),
     ]
