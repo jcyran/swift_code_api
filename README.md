@@ -222,7 +222,7 @@ The following endpoints are available for interacting with the SWIFT codes API:
 - **Response**:
   ```json
   {
-      "message": "SWIFT code deleted successfully"
+      "message": "Bank branch deleted successfully."
   }
   ```
 
